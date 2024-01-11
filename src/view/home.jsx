@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { TODO_LIST } from "../mock/todo.list";
-import Modal from "../components/modal";
 import Button from "../components/button";
+import DeleteItem from "./deleteItem";
 
 function Home() {
 	const [list, setList] = useState(TODO_LIST);
 	const [sizeList, setSizeList] = useState(list.length);
 	const [listUpdate, setListUpdate] = useState([]);
+	const [deleteOpen, setDeleteOpen] = useState(false);
+	const [deleteItem, setDeleteItem] = useState();
 
 	const reoladList = function (newList) {
 		setList(newList);
@@ -75,6 +77,9 @@ function Home() {
 		const AddNewList = list.slice(0, list.length);
 		AddNewList.splice(item, 1);
 		reoladList(AddNewList);
+		setInterval(() => {
+			setDeleteOpen(false);
+		}, 300);
 	}
 
 	return (
@@ -113,7 +118,8 @@ function Home() {
 									</button>
 									<button
 										onClick={() => {
-											deleteList(index);
+											setDeleteItem(index);
+											setDeleteOpen(true);
 										}}>
 										Delete
 									</button>
@@ -131,6 +137,18 @@ function Home() {
 				</form>
 				<button onClick={updateList}>Salvar</button> */}
 			</div>
+			<DeleteItem isOpen={deleteOpen}>
+				<Button
+					text={"Não"}
+					className={"buttonA"}
+					onClick={() => setDeleteOpen(false)}
+				/>
+				<Button
+					text={"Sim"}
+					className={"buttonB"}
+					onClick={() => deleteList(deleteItem)}
+				/>
+			</DeleteItem>
 		</div>
 	);
 }
