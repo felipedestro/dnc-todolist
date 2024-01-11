@@ -1,0 +1,23 @@
+@mixin buttonExit {
+	width: 240px;
+	height: 60px;
+	background-color: #0c70f2;
+	border-radius: 10px;
+	border: none;
+
+	color: white;
+	font-size: 25px;
+	font-weight: 600;
+}
+
+@mixin buttonSave {
+	width: 240px;
+	height: 60px;
+	background-color: transparent;
+	border-radius: 10px;
+	border: 1px solid black;
+
+	color: black;
+	font-size: 25px;
+	font-weight: 500;
+}
