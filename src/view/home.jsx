@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { TODO_LIST } from "../mock/todo.list";
 import Modal from "../components/modal";
+import Button from "../components/button";
 
 function Home() {
 	const [list, setList] = useState(TODO_LIST);
