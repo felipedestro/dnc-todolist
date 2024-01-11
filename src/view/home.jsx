@@ -4,11 +4,14 @@ import Button from "../components/button";
 import DeleteItem from "./deleteItem";
 
 function Home() {
+	const [deleteOpen, setDeleteOpen] = useState(false);
+	const [editOpen, setEditOpen] = useState(false);
+
 	const [list, setList] = useState(TODO_LIST);
 	const [sizeList, setSizeList] = useState(list.length);
+
 	const [listUpdate, setListUpdate] = useState([]);
-	const [deleteOpen, setDeleteOpen] = useState(false);
-	const [deleteItem, setDeleteItem] = useState();
+	const [listDelete, setListDelete] = useState(null);
 
 	const reoladList = function (newList) {
 		setList(newList);
@@ -77,9 +80,7 @@ function Home() {
 		const AddNewList = list.slice(0, list.length);
 		AddNewList.splice(item, 1);
 		reoladList(AddNewList);
-		setInterval(() => {
-			setDeleteOpen(false);
-		}, 300);
+		setDeleteOpen(false);
 	}
 
 	return (
@@ -118,7 +119,7 @@ function Home() {
 									</button>
 									<button
 										onClick={() => {
-											setDeleteItem(index);
+											setListDelete(index);
 											setDeleteOpen(true);
 										}}>
 										Delete
@@ -146,7 +147,7 @@ function Home() {
 				<Button
 					text={"Sim"}
 					className={"buttonB"}
-					onClick={() => deleteList(deleteItem)}
+					onClick={() => deleteList(listDelete)}
 				/>
 			</DeleteItem>
 		</div>
