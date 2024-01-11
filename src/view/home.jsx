@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { TODO_LIST } from "../mock/todo.list";
+import Modal from "../components/modal";
 
 function Home() {
 	const [list, setList] = useState(TODO_LIST);
@@ -78,12 +79,12 @@ function Home() {
 	return (
 		<div className="home">
 			<div>
-				<form>
+				{/* <form>
 					<input type="text" id="title" /> <br /> <br />
 					<input type="text" id="description" /> <br /> <br />
 					<input type="checkbox" id="completed" />
 				</form>
-				<button onClick={addList}>Salvar</button>
+				<button onClick={addList}>Salvar</button> */}
 			</div>
 			<div>
 				<table>
@@ -122,12 +123,12 @@ function Home() {
 				</table>
 			</div>
 			<div>
-				<form>
+				{/* <form>
 					<input type="text" id="editTitle" /> <br /> <br />
 					<input type="text" id="editDescription" /> <br /> <br />
 					<input type="checkbox" id="editCompleted" />
 				</form>
-				<button onClick={updateList}>Salvar</button>
+				<button onClick={updateList}>Salvar</button> */}
 			</div>
 		</div>
 	);
