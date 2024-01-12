@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { TODO_LIST } from "../mock/todo.list";
-import Button from "../components/button";
-import DeleteItem from "./deleteItem";
+import TableList from "../components/TableList/tableList";
+import AddList from "../components/AddList/addList";
 
 function Home() {
-	const [deleteOpen, setDeleteOpen] = useState(false);
-	const [editOpen, setEditOpen] = useState(false);
-
 	const [list, setList] = useState(TODO_LIST);
 	const [sizeList, setSizeList] = useState(list.length);
 
-	const [listUpdate, setListUpdate] = useState([]);
-	const [listDelete, setListDelete] = useState(null);
+	const [addOpen, setAddOpen] = useState(false);
 
-	const reoladList = function (newList) {
+	const handleReoladList = (newList) => {
 		setList(newList);
+	};
+
+	const handleSetSizeList = (increment) => {
+		setSizeList(sizeList + increment);
 	};
 
 	function getList(itemID) {
@@ -27,26 +27,6 @@ function Home() {
 		description.value = getItem.description;
 		completed.checked = getItem.completed;
 		setListUpdate(getItem);
-	}
-
-	function addList() {
-		let title = document.getElementById("title");
-		let description = document.getElementById("description");
-		let completed = document.getElementById("completed");
-
-		const AddNewList = list.slice(0, list.length);
-		AddNewList.push({
-			id: sizeList + 1,
-			title: title.value,
-			description: description.value,
-			completed: completed.checked,
-		});
-
-		title.value = "";
-		description.value = "";
-		completed.checked = false;
-		setSizeList(sizeList + 1);
-		reoladList(AddNewList);
 	}
 
 	function updateList() {
@@ -69,7 +49,7 @@ function Home() {
 				completed: completed.checked,
 			};
 
-			reoladList(addNewList);
+			handleReoladList(addNewList);
 			title.value = "";
 			description.value = "";
 			completed.checked = false;
@@ -79,77 +59,35 @@ function Home() {
 	function deleteList(item) {
 		const AddNewList = list.slice(0, list.length);
 		AddNewList.splice(item, 1);
-		reoladList(AddNewList);
+		handleReoladList(AddNewList);
 		setDeleteOpen(false);
 	}
 
 	return (
 		<div className="home">
-			<div>
-				{/* <form>
-					<input type="text" id="title" /> <br /> <br />
-					<input type="text" id="description" /> <br /> <br />
-					<input type="checkbox" id="completed" />
-				</form>
-				<button onClick={addList}>Salvar</button> */}
+			<div className="home__table">
+				<TableList list={list} handleReoladList={handleReoladList}>
+					<tr>
+						<td>Adicinoar tarefa...</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>
+							<button onClick={() => setAddOpen(true)}>+</button>
+						</td>
+					</tr>
+				</TableList>
 			</div>
-			<div>
-				<table>
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>Título</th>
-							<th>Descrição</th>
-							<th>Status</th>
-						</tr>
-					</thead>
-					<tbody>
-						{list.map((item, index) => (
-							<tr key={index}>
-								<td>{item.id}</td>
-								<td>{item.title}</td>
-								<td>{item.description}</td>
-								<td>{item.completed.toString()}</td>
-								<td>
-									<button
-										onClick={() => {
-											getList(item.id);
-										}}>
-										Edit
-									</button>
-									<button
-										onClick={() => {
-											setListDelete(index);
-											setDeleteOpen(true);
-										}}>
-										Delete
-									</button>
-								</td>
-							</tr>
-						))}
-					</tbody>
-				</table>
-			</div>
-			<div>
-				{/* <form>
-					<input type="text" id="editTitle" /> <br /> <br />
-					<input type="text" id="editDescription" /> <br /> <br />
-					<input type="checkbox" id="editCompleted" />
-				</form>
-				<button onClick={updateList}>Salvar</button> */}
-			</div>
-			<DeleteItem isOpen={deleteOpen}>
-				<Button
-					text={"Não"}
-					className={"buttonA"}
-					onClick={() => setDeleteOpen(false)}
+			<div className="home__modal">
+				<AddList
+					isOpen={addOpen}
+					modalIsOpen={() => setAddOpen(!addOpen)}
+					list={list}
+					sizeList={sizeList}
+					incrementList={handleSetSizeList}
+					isAdd={handleReoladList}
 				/>
-				<Button
-					text={"Sim"}
-					className={"buttonB"}
-					onClick={() => deleteList(listDelete)}
-				/>
-			</DeleteItem>
+			</div>
 		</div>
 	);
 }
