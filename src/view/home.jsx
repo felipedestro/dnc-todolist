@@ -17,52 +17,6 @@ function Home() {
 		setSizeList(sizeList + increment);
 	};
 
-	function getList(itemID) {
-		const getItem = list.find((item) => item.id == itemID);
-		let title = document.getElementById("editTitle");
-		let description = document.getElementById("editDescription");
-		let completed = document.getElementById("editCompleted");
-
-		title.value = getItem.title;
-		description.value = getItem.description;
-		completed.checked = getItem.completed;
-		setListUpdate(getItem);
-	}
-
-	function updateList() {
-		let title = document.getElementById("editTitle");
-		let description = document.getElementById("editDescription");
-		let completed = document.getElementById("editCompleted");
-
-		if (
-			listUpdate.title === title.value &&
-			listUpdate.description === description.value &&
-			listUpdate.completed === completed.checked
-		) {
-			alert("Altere ao menos uma das unidades, ou clique em cancelar");
-		} else {
-			const addNewList = list.splice(0, list.length);
-			addNewList[listUpdate.id] = {
-				id: listUpdate.id + 1,
-				title: title.value,
-				description: description.value,
-				completed: completed.checked,
-			};
-
-			handleReoladList(addNewList);
-			title.value = "";
-			description.value = "";
-			completed.checked = false;
-		}
-	}
-
-	function deleteList(item) {
-		const AddNewList = list.slice(0, list.length);
-		AddNewList.splice(item, 1);
-		handleReoladList(AddNewList);
-		setDeleteOpen(false);
-	}
-
 	return (
 		<div className="home">
 			<div className="home__table">
@@ -80,11 +34,11 @@ function Home() {
 			</div>
 			<div className="home__modal">
 				<AddList
-					isOpen={addOpen}
-					modalIsOpen={() => setAddOpen(!addOpen)}
+					AddisOpen={addOpen}
+					addIsClose={() => setAddOpen(!addOpen)}
 					list={list}
 					sizeList={sizeList}
-					incrementList={handleSetSizeList}
+					increment={handleSetSizeList}
 					isAdd={handleReoladList}
 				/>
 			</div>

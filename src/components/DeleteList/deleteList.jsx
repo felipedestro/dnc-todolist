@@ -1,7 +1,7 @@
 import Modal from "../modal";
 import Button from "../button";
 
-function DeleteList({ isOpen, setModalIsOpen, list, itemId, isDelete }) {
+function DeleteList({ DeleteIsOpen, DeleteIsClose, list, listItem, isDelete }) {
 	function handleDeleteList(id) {
 		const itemList = list.findIndex((item) => item.id == id);
 		const AddNewList = [...list];
@@ -9,25 +9,47 @@ function DeleteList({ isOpen, setModalIsOpen, list, itemId, isDelete }) {
 		isDelete(AddNewList);
 	}
 
-	if (isOpen) {
+	function handleVerifyList(id) {
+		const getList = [...list];
+		let item = getList.find((e) => e.id == id);
+		return (
+			<tr>
+				<td>{item.title}</td>
+				<td>{item.description}</td>
+				<td>{item.completed.toString()}</td>
+			</tr>
+		);
+	}
+
+	if (DeleteIsOpen) {
 		return (
 			<Modal>
 				<div className="deleteItem">
 					<div className="deleteItem__messagem">
 						<h1>Deseja relamente deletar esse item?</h1>
+						<table>
+							<thead>
+								<tr>
+									<th>Título</th>
+									<th>Descrição</th>
+									<th>Status</th>
+								</tr>
+							</thead>
+							<tbody>{handleVerifyList(listItem)}</tbody>
+						</table>
 					</div>
 					<div className="deleteItem__actions">
 						<Button
-							text={"Sair"}
+							text={"Não"}
 							className={"buttonA"}
-							onClick={setModalIsOpen}
+							onClick={DeleteIsClose}
 						/>
 						<Button
-							text={"Salvar"}
+							text={"Sim"}
 							className={"buttonB"}
 							onClick={() => {
-								handleDeleteList(itemId);
-								setModalIsOpen();
+								handleDeleteList(listItem);
+								DeleteIsClose();
 							}}
 						/>
 					</div>
