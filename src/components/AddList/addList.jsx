@@ -2,7 +2,7 @@ import React from "react";
 import Modal from "../modal";
 
 function AddList({
-	isOpen,
+	AddisOpen,
 	modalIsOpen,
 	list,
 	sizeList,
@@ -28,7 +28,7 @@ function AddList({
 		incrementList(1);
 		isAdd(AddNewList);
 	}
-	if (isOpen) {
+	if (AddisOpen) {
 		return (
 			<>
 				<Modal>

@@ -38,10 +38,10 @@ function TableList({ list, handleReoladList, children }) {
 				<tfoot>{children}</tfoot>
 			</table>
 			<DeleteList
-				isOpen={deleteModal}
-				setModalIsOpen={() => setDeleteModal(!deleteModal)}
+				DeleteIsOpen={deleteModal}
+				DeleteIsClose={() => setDeleteModal(!deleteModal)}
 				list={list}
-				itemId={index}
+				listItem={index}
 				isDelete={handleReoladList}
 			/>
 		</>
