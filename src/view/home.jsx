@@ -3,6 +3,8 @@ import { TODO_LIST } from "../mock/todo.list";
 import TableList from "../components/TableList/tableList";
 import AddList from "../components/AddList/addList";
 
+import "./home.scss";
+
 function Home() {
 	const [list, setList] = useState(TODO_LIST);
 	const [sizeList, setSizeList] = useState(list.length);
@@ -19,19 +21,14 @@ function Home() {
 
 	return (
 		<div className="home">
-			<div className="home__table">
-				<TableList list={list} handleReoladList={handleReoladList}>
-					<tr>
-						<td>Adicinoar tarefa...</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td>
-							<button onClick={() => setAddOpen(true)}>+</button>
-						</td>
-					</tr>
-				</TableList>
-			</div>
+			<h1>Otimize seu tempo e se organize com o nosso Planejador Diário.</h1>
+
+			<TableList
+				list={list}
+				handleReoladList={handleReoladList}
+				addNew={() => setAddOpen(true)}
+			/>
+
 			<div className="home__modal">
 				<AddList
 					AddisOpen={addOpen}
