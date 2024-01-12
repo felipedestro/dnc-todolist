@@ -1,31 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import Modal from "../modal";
+import Button from "../button";
 
-function AddList({
-	AddisOpen,
-	modalIsOpen,
-	list,
-	sizeList,
-	incrementList,
-	isAdd,
-}) {
-	function handleAddList(listGet) {
-		let title = document.getElementById("title");
-		let description = document.getElementById("description");
-		let completed = document.getElementById("completed");
+function AddList({ AddisOpen, addIsClose, list, sizeList, increment, isAdd }) {
+	const [title, setTitle] = useState("");
+	const [description, setDescription] = useState("");
+	const [completed, setCompleted] = useState(false);
 
-		const AddNewList = [...listGet];
+	function handleAddList() {
+		const AddNewList = [...list];
 		AddNewList.push({
 			id: sizeList + 1,
-			title: title.value,
-			description: description.value,
-			completed: completed.checked,
+			title: title,
+			description: description,
+			completed: completed,
 		});
 
-		title.value = "";
-		description.value = "";
-		completed.checked = false;
-		incrementList(1);
+		setTitle("");
+		setDescription("");
+		setCompleted(false);
+		increment(1);
 		isAdd(AddNewList);
 	}
 	if (AddisOpen) {
@@ -34,10 +28,40 @@ function AddList({
 				<Modal>
 					<div className="addList">
 						<form>
-							<input type="text" id="title" /> <br /> <br />
-							<input type="text" id="description" /> <br /> <br />
-							<input type="checkbox" id="completed" />
+							<input
+								type="text"
+								id="title"
+								value={title}
+								onChange={(e) => setTitle(e.target.value)}
+							/>{" "}
+							<br /> <br />
+							<input
+								type="text"
+								id="description"
+								value={description}
+								onChange={(e) => setDescription(e.target.value)}
+							/>{" "}
+							<br /> <br />
+							<input
+								type="checkbox"
+								id="completed"
+								value={completed}
+								onChange={(e) => setCompleted(e.target.checked)}
+							/>
 						</form>
+						<Button
+							text={"Cancelar"}
+							className={"buttonA"}
+							onClick={addIsClose}
+						/>
+						<Button
+							text={"Salvar"}
+							className={"buttonB"}
+							onClick={() => {
+								handleAddList();
+								addIsClose();
+							}}
+						/>
 					</div>
 				</Modal>
 			</>

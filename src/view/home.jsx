@@ -56,13 +56,6 @@ function Home() {
 		}
 	}
 
-	function deleteList(item) {
-		const AddNewList = list.slice(0, list.length);
-		AddNewList.splice(item, 1);
-		handleReoladList(AddNewList);
-		setDeleteOpen(false);
-	}
-
 	return (
 		<div className="home">
 			<div className="home__table">
@@ -80,11 +73,11 @@ function Home() {
 			</div>
 			<div className="home__modal">
 				<AddList
-					isOpen={addOpen}
-					modalIsOpen={() => setAddOpen(!addOpen)}
+					AddisOpen={addOpen}
+					addIsClose={() => setAddOpen(!addOpen)}
 					list={list}
 					sizeList={sizeList}
-					incrementList={handleSetSizeList}
+					increment={handleSetSizeList}
 					isAdd={handleReoladList}
 				/>
 			</div>
