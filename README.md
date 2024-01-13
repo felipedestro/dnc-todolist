@@ -1,5 +1,5 @@
 <h1 align="center"> TODO LIST </h1>
-
+<p align="center">Link do projeto em deploy: <a href="https://dnctodolist.netlify.app/" target="_blank">Clique Aqui</a></p>
 <p align="center">
 O projeto todolist tem base descorrer funcionalidades de React + Vite para resposta ao desafio 03 do curso de FullStack Developer da escola DNC. <br/>
 </p>
