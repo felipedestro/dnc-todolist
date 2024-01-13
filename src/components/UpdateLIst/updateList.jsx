@@ -29,26 +29,42 @@ function UpdateList({ updateIsOpen, updateIsClose, list, listItem, isUpdate }) {
 	}
 
 	function handleUpdateList() {
-		if (title !== "" && description !== "") {
+		const getList = [...list];
+		let item = getList.find((e) => e.id == listItem());
+		if (completed !== item.completed) {
 			const addNewList = [...list];
 			const index = addNewList.findIndex((i) => i.id == listItem());
 			addNewList[index] = {
 				id: listItem(),
-				title: title,
-				description: description,
+				title: item.title,
+				description: item.description,
 				completed: completed,
 			};
-
 			isUpdate(addNewList);
 			setTitle("");
 			setDescription("");
 			setCompleted(false);
 		} else {
-			alert("Os campos são obrigatórios para a alteração");
-			setTitle("");
-			setDescription("");
-			setCompleted(false);
-			updateIsClose;
+			if (title !== "" || description !== "") {
+				const addNewList = [...list];
+				const index = addNewList.findIndex((i) => i.id == listItem());
+				addNewList[index] = {
+					id: listItem(),
+					title: title,
+					description: description,
+					completed: completed,
+				};
+				isUpdate(addNewList);
+				setTitle("");
+				setDescription("");
+				setCompleted(false);
+			} else {
+				alert("Os campos são obrigatórios para a alteração");
+				setTitle("");
+				setDescription("");
+				setCompleted(false);
+				updateIsClose;
+			}
 		}
 	}
 
