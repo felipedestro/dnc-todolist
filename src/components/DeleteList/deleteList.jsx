@@ -1,5 +1,8 @@
 import Modal from "../modal";
 import Button from "../button";
+import iconCompleted from "../../assets/completed.svg";
+import iconNoCompleted from "../../assets/no_completed_black.svg";
+import "./deleteList.scss";
 
 function DeleteList({ DeleteIsOpen, DeleteIsClose, list, listItem, isDelete }) {
 	function handleDeleteList(id) {
@@ -16,7 +19,13 @@ function DeleteList({ DeleteIsOpen, DeleteIsClose, list, listItem, isDelete }) {
 			<tr>
 				<td>{item.title}</td>
 				<td>{item.description}</td>
-				<td>{item.completed.toString()}</td>
+				<td>
+					{item.completed == true ? (
+						<img src={iconCompleted} alt="icon completed" />
+					) : (
+						<img src={iconNoCompleted} alt="icon completed" />
+					)}
+				</td>
 			</tr>
 		);
 	}
@@ -24,21 +33,23 @@ function DeleteList({ DeleteIsOpen, DeleteIsClose, list, listItem, isDelete }) {
 	if (DeleteIsOpen) {
 		return (
 			<Modal>
-				<div className="deleteItem">
-					<div className="deleteItem__messagem">
+				<div className="deleteList">
+					<div className="deleteList__messagem">
 						<h1>Deseja relamente deletar esse item?</h1>
-						<table>
-							<thead>
-								<tr>
-									<th>Título</th>
-									<th>Descrição</th>
-									<th>Status</th>
-								</tr>
-							</thead>
-							<tbody>{handleVerifyList(listItem)}</tbody>
-						</table>
+						<div className="deleteList__table">
+							<table>
+								<thead>
+									<tr>
+										<th>Título</th>
+										<th>Descrição</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>{handleVerifyList(listItem())}</tbody>
+							</table>
+						</div>
 					</div>
-					<div className="deleteItem__actions">
+					<div className="deleteList__actions">
 						<Button
 							text={"Não"}
 							className={"buttonA"}
@@ -48,7 +59,7 @@ function DeleteList({ DeleteIsOpen, DeleteIsClose, list, listItem, isDelete }) {
 							text={"Sim"}
 							className={"buttonB"}
 							onClick={() => {
-								handleDeleteList(listItem);
+								handleDeleteList(listItem());
 								DeleteIsClose();
 							}}
 						/>
