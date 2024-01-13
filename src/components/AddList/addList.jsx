@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Modal from "../modal";
 import Button from "../button";
+import "./addList.scss";
 
 function AddList({ AddisOpen, addIsClose, list, sizeList, increment, isAdd }) {
 	const [title, setTitle] = useState("");
@@ -27,41 +28,47 @@ function AddList({ AddisOpen, addIsClose, list, sizeList, increment, isAdd }) {
 			<>
 				<Modal>
 					<div className="addList">
+						<h1>Adicionar uma nova tarefa: </h1>
 						<form>
+							<label htmlFor="title">Título:</label>
 							<input
 								type="text"
 								id="title"
 								value={title}
 								onChange={(e) => setTitle(e.target.value)}
-							/>{" "}
-							<br /> <br />
+							/>
+							<label htmlFor="description">Descrição:</label>
 							<input
 								type="text"
 								id="description"
 								value={description}
 								onChange={(e) => setDescription(e.target.value)}
-							/>{" "}
-							<br /> <br />
-							<input
-								type="checkbox"
-								id="completed"
-								value={completed}
-								onChange={(e) => setCompleted(e.target.checked)}
 							/>
+							<span>
+								<label htmlFor="completed">Concluído:</label>
+								<input
+									type="checkbox"
+									id="completed"
+									value={completed}
+									onChange={(e) => setCompleted(e.target.checked)}
+								/>
+							</span>
 						</form>
-						<Button
-							text={"Cancelar"}
-							className={"buttonA"}
-							onClick={addIsClose}
-						/>
-						<Button
-							text={"Salvar"}
-							className={"buttonB"}
-							onClick={() => {
-								handleAddList();
-								addIsClose();
-							}}
-						/>
+						<div className="addList__actions">
+							<Button
+								text={"Cancelar"}
+								className={"buttonA"}
+								onClick={addIsClose}
+							/>
+							<Button
+								text={"Salvar"}
+								className={"buttonB"}
+								onClick={() => {
+									handleAddList();
+									addIsClose();
+								}}
+							/>
+						</div>
 					</div>
 				</Modal>
 			</>
