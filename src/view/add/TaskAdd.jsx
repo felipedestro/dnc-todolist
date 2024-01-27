@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import { useNavigate, useOutletContext } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
 import Modal from "../../components/Modal/modal";
 import Button from "../../components/Button/button";
 import "./TaskAdd.scss";
 
-function TaskAdd({ AddisOpen, addIsClose, list, sizeList, increment, isAdd }) {
+function TaskAdd({ list, reloadList }) {
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
 	const [completed, setCompleted] = useState(false);
+
+	const [ModalIsOpen, setModalOpen] = useState(false);
+	const [sizeList, setSizeList] = useOutletContext();
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		setModalOpen(true);
+	}, []);
 
 	function handleAddList() {
 		const AddNewList = [...list];
@@ -20,10 +29,10 @@ function TaskAdd({ AddisOpen, addIsClose, list, sizeList, increment, isAdd }) {
 		setTitle("");
 		setDescription("");
 		setCompleted(false);
-		increment(1);
-		isAdd(AddNewList);
+		setSizeList((size) => size + 1);
+		reloadList(AddNewList);
 	}
-	if (AddisOpen) {
+	if (ModalIsOpen) {
 		return (
 			<>
 				<Modal>
@@ -58,14 +67,17 @@ function TaskAdd({ AddisOpen, addIsClose, list, sizeList, increment, isAdd }) {
 							<Button
 								text={"Cancelar"}
 								className={"buttonA"}
-								onClick={addIsClose}
+								onClick={() => {
+									setModalOpen(!ModalIsOpen);
+									navigate("/");
+								}}
 							/>
 							<Button
 								text={"Salvar"}
 								className={"buttonB"}
 								onClick={() => {
 									handleAddList();
-									addIsClose();
+									navigate("/");
 								}}
 							/>
 						</div>

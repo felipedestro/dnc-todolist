@@ -9,11 +9,18 @@ import TaskDelete from "./view/delete/TaskDelete";
 function App() {
 	const [list, setList] = useState(TODO_LIST);
 
+	const handleReoladList = (newList) => {
+		setList(newList);
+	};
+
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path="/" element={<Home />}>
-					<Route path="new" element={<TaskAdd />} />
+				<Route path="/" element={<Home list={list} />}>
+					<Route
+						path="add"
+						element={<TaskAdd list={list} reloadList={handleReoladList} />}
+					/>
 					<Route path="edit/:id" element={<TaskEdit />} />
 					<Route path="delete/:id" element={<TaskDelete />} />
 				</Route>

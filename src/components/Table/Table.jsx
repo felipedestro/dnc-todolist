@@ -4,8 +4,11 @@ import iconDelete from "../../assets/delete.svg";
 import iconMore from "../../assets/more.svg";
 import iconCompleted from "../../assets/completed.svg";
 import iconNoCompleted from "../../assets/no_completed.svg";
+import { useNavigate } from "react-router-dom";
 
-function Table({ list, SetAddNew, SetUpdateList, SetDeleteList, setIndex }) {
+function Table({ list, SetUpdateList, SetDeleteList, setIndex }) {
+	const navigate = useNavigate();
+
 	return (
 		<>
 			<div className="Table">
@@ -33,15 +36,13 @@ function Table({ list, SetAddNew, SetUpdateList, SetDeleteList, setIndex }) {
 								<td>
 									<button
 										onClick={() => {
-											SetUpdateList();
-											setIndex(item.id);
+											navigate(`edit/${item.id}`);
 										}}>
 										<img src={iconEdit} alt="icon edit" />
 									</button>
 									<button
 										onClick={() => {
-											SetDeleteList();
-											setIndex(item.id);
+											navigate(`delete/${item.id}`);
 										}}>
 										<img src={iconDelete} alt="icon delete" />
 									</button>
@@ -55,7 +56,7 @@ function Table({ list, SetAddNew, SetUpdateList, SetDeleteList, setIndex }) {
 							<td></td>
 							<td></td>
 							<td>
-								<button onClick={SetAddNew}>
+								<button onClick={() => navigate("/add")}>
 									<img src={iconMore} alt="icon more" />
 								</button>
 							</td>
