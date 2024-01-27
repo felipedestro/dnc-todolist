@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Modal from "../modal";
-import Button from "../button";
-import "./addList.scss";
+import Modal from "../../components/Modal/modal";
+import Button from "../../components/Button/button";
+import "./TaskAdd.scss";
 
-function AddList({ AddisOpen, addIsClose, list, sizeList, increment, isAdd }) {
+function TaskAdd({ AddisOpen, addIsClose, list, sizeList, increment, isAdd }) {
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
 	const [completed, setCompleted] = useState(false);
@@ -27,7 +27,7 @@ function AddList({ AddisOpen, addIsClose, list, sizeList, increment, isAdd }) {
 		return (
 			<>
 				<Modal>
-					<div className="addList">
+					<div className="TaskAdd">
 						<h1>Adicionar uma nova tarefa: </h1>
 						<form>
 							<label htmlFor="title">Título:</label>
@@ -54,7 +54,7 @@ function AddList({ AddisOpen, addIsClose, list, sizeList, increment, isAdd }) {
 								/>
 							</span>
 						</form>
-						<div className="addList__actions">
+						<div className="TaskAdd__actions">
 							<Button
 								text={"Cancelar"}
 								className={"buttonA"}
@@ -78,4 +78,4 @@ function AddList({ AddisOpen, addIsClose, list, sizeList, increment, isAdd }) {
 	}
 }
 
-export default AddList;
+export default TaskAdd;

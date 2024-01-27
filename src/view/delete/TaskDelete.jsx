@@ -1,10 +1,10 @@
-import Modal from "../modal";
-import Button from "../button";
+import Modal from "../../components/Modal/modal";
+import Button from "../../components/Button/button";
 import iconCompleted from "../../assets/completed.svg";
 import iconNoCompleted from "../../assets/no_completed_black.svg";
-import "./deleteList.scss";
+import "./TaskDelete.scss";
 
-function DeleteList({ DeleteIsOpen, DeleteIsClose, list, listItem, isDelete }) {
+function TaskDelete({ DeleteIsOpen, DeleteIsClose, list, listItem, isDelete }) {
 	function handleDeleteList(id) {
 		const itemList = list.findIndex((item) => item.id == id);
 		const AddNewList = [...list];
@@ -33,10 +33,10 @@ function DeleteList({ DeleteIsOpen, DeleteIsClose, list, listItem, isDelete }) {
 	if (DeleteIsOpen) {
 		return (
 			<Modal>
-				<div className="deleteList">
-					<div className="deleteList__messagem">
+				<div className="taskDelete">
+					<div className="taskDelete__messagem">
 						<h1>Deseja relamente deletar esse item?</h1>
-						<div className="deleteList__table">
+						<div className="taskDelete__table">
 							<table>
 								<thead>
 									<tr>
@@ -49,7 +49,7 @@ function DeleteList({ DeleteIsOpen, DeleteIsClose, list, listItem, isDelete }) {
 							</table>
 						</div>
 					</div>
-					<div className="deleteList__actions">
+					<div className="taskDelete__actions">
 						<Button
 							text={"Não"}
 							className={"buttonA"}
@@ -72,4 +72,4 @@ function DeleteList({ DeleteIsOpen, DeleteIsClose, list, listItem, isDelete }) {
 	}
 }
 
-export default DeleteList;
+export default TaskDelete;

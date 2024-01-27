@@ -1,22 +1,15 @@
-import { useState } from "react";
-import "./tableList.scss";
+import "./Table.scss";
 import iconEdit from "../../assets/edit.svg";
 import iconDelete from "../../assets/delete.svg";
 import iconMore from "../../assets/more.svg";
 import iconCompleted from "../../assets/completed.svg";
 import iconNoCompleted from "../../assets/no_completed.svg";
 
-function TableList({
-	list,
-	SetAddNew,
-	SetUpdateList,
-	SetDeleteList,
-	setIndex,
-}) {
+function Table({ list, SetAddNew, SetUpdateList, SetDeleteList, setIndex }) {
 	return (
 		<>
-			<div className="tableList">
-				<table className="tableList__table-main">
+			<div className="Table">
+				<table className="Table__main">
 					<thead>
 						<tr>
 							<th>Título</th>
@@ -74,4 +67,4 @@ function TableList({
 	);
 }
 
-export default TableList;
+export default Table;

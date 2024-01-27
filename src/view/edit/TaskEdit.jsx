@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import Modal from "../modal";
-import Button from "../button";
-import "./updateList.scss";
+import Modal from "../../components/Modal/modal";
+import Button from "../../components/Button/button";
+import "./TaskEdit.scss";
 import iconCompleted from "../../assets/completed.svg";
 import iconNoCompleted from "../../assets/no_completed_black.svg";
 
-function UpdateList({ updateIsOpen, updateIsClose, list, listItem, isUpdate }) {
+function TaskEdit({ updateIsOpen, updateIsClose, list, listItem, isUpdate }) {
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
 	const [completed, setCompleted] = useState(false);
@@ -72,9 +72,9 @@ function UpdateList({ updateIsOpen, updateIsClose, list, listItem, isUpdate }) {
 		return (
 			<>
 				<Modal>
-					<div className="updateList">
-						<div className="updateList__messagem">
-							<div className="updateList__table">
+					<div className="taskEdit">
+						<div className="taskEdit__messagem">
+							<div className="taskEdit__table">
 								<h1>Item selecionado para alteração: </h1>
 								<table>
 									<thead>
@@ -88,7 +88,7 @@ function UpdateList({ updateIsOpen, updateIsClose, list, listItem, isUpdate }) {
 								</table>
 							</div>
 						</div>
-						<div className="updateList__form">
+						<div className="taskEdit__form">
 							<div>
 								<h4>Digite os novos valores: </h4>
 								<form>
@@ -119,7 +119,7 @@ function UpdateList({ updateIsOpen, updateIsClose, list, listItem, isUpdate }) {
 									</span>
 								</form>
 							</div>
-							<div className="updateList__actions">
+							<div className="taskEdit__actions">
 								<Button
 									text={"Sair"}
 									className={"buttonA"}
@@ -144,4 +144,4 @@ function UpdateList({ updateIsOpen, updateIsClose, list, listItem, isUpdate }) {
 	}
 }
 
-export default UpdateList;
+export default TaskEdit;
