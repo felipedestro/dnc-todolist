@@ -28,10 +28,6 @@ O projeto todolist tem base descorrer funcionalidades de React + Vite para respo
 - Alterar informação do item selecionado
 - Remover item da lista
 
-## Demonstração
-
-<img src=".github/video.gif" style="background: white">
-
 ## Tecnologias
 
 <p align="left">
