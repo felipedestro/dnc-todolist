@@ -4,8 +4,8 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: rgba(0, 0, 0, 0.8);
 	z-index: 9999;
+	background-color: rgba(0, 0, 0, 0.8);
 
 	&__container {
 		display: flex;
@@ -23,5 +23,20 @@
 		border: none;
 		border-radius: 10px;
 		background-color: white;
+	}
+}
+
+.modal-in {
+	animation-name: modal-in;
+	animation-duration: 1s;
+	animation-fill-mode: both;
+}
+
+@keyframes modal-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
 	}
 }
