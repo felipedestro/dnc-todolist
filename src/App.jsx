@@ -21,8 +21,14 @@ function App() {
 						path="add"
 						element={<TaskAdd list={list} reloadList={handleReoladList} />}
 					/>
-					<Route path="edit/:id" element={<TaskEdit />} />
-					<Route path="delete/:id" element={<TaskDelete />} />
+					<Route
+						path="edit/:id"
+						element={<TaskEdit list={list} reloadList={handleReoladList} />}
+					/>
+					<Route
+						path="delete/:id"
+						element={<TaskDelete list={list} reloadList={handleReoladList} />}
+					/>
 				</Route>
 			</Routes>
 		</BrowserRouter>

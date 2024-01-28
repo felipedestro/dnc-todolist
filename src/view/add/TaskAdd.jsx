@@ -1,5 +1,5 @@
 import { useNavigate, useOutletContext } from "react-router-dom";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "../../components/Modal/modal";
 import Button from "../../components/Button/button";
 import "./TaskAdd.scss";
@@ -9,9 +9,14 @@ function TaskAdd({ list, reloadList }) {
 	const [description, setDescription] = useState("");
 	const [completed, setCompleted] = useState(false);
 
-	const [ModalIsOpen, setModalOpen] = useState(false);
+	const [ModalOpen, setModalOpen] = useState(false);
 	const [sizeList, setSizeList] = useOutletContext();
 	const navigate = useNavigate();
+
+	const cancel = () => {
+		setModalOpen(!ModalOpen);
+		navigate("/");
+	};
 
 	useEffect(() => {
 		setModalOpen(true);
@@ -30,20 +35,22 @@ function TaskAdd({ list, reloadList }) {
 		setDescription("");
 		setCompleted(false);
 		setSizeList((size) => size + 1);
+		setModalOpen(!ModalOpen);
 		reloadList(AddNewList);
 	}
-	if (ModalIsOpen) {
+	if (ModalOpen) {
 		return (
 			<>
 				<Modal>
 					<div className="TaskAdd">
 						<h1>Adicionar uma nova tarefa: </h1>
-						<form>
+						<form onSubmit={handleAddList}>
 							<label htmlFor="title">Título:</label>
 							<input
 								type="text"
 								id="title"
 								value={title}
+								required
 								onChange={(e) => setTitle(e.target.value)}
 							/>
 							<label htmlFor="description">Descrição:</label>
@@ -51,6 +58,7 @@ function TaskAdd({ list, reloadList }) {
 								type="text"
 								id="description"
 								value={description}
+								required
 								onChange={(e) => setDescription(e.target.value)}
 							/>
 							<span>
@@ -62,25 +70,15 @@ function TaskAdd({ list, reloadList }) {
 									onChange={(e) => setCompleted(e.target.checked)}
 								/>
 							</span>
+							<div className="TaskAdd__actions">
+								<Button
+									text={"Cancelar"}
+									className={"buttonA"}
+									click={cancel}
+								/>
+								<Button text={"Salvar"} className={"buttonB"} type={"submit"} />
+							</div>
 						</form>
-						<div className="TaskAdd__actions">
-							<Button
-								text={"Cancelar"}
-								className={"buttonA"}
-								onClick={() => {
-									setModalOpen(!ModalIsOpen);
-									navigate("/");
-								}}
-							/>
-							<Button
-								text={"Salvar"}
-								className={"buttonB"}
-								onClick={() => {
-									handleAddList();
-									navigate("/");
-								}}
-							/>
-						</div>
 					</div>
 				</Modal>
 			</>

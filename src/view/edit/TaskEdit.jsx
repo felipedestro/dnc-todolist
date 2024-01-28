@@ -1,14 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "../../components/Modal/modal";
 import Button from "../../components/Button/button";
-import "./TaskEdit.scss";
 import iconCompleted from "../../assets/completed.svg";
 import iconNoCompleted from "../../assets/no_completed_black.svg";
+import { useNavigate, useParams } from "react-router-dom";
+import "./TaskEdit.scss";
 
-function TaskEdit({ updateIsOpen, updateIsClose, list, listItem, isUpdate }) {
+function TaskEdit({ list, reloadList }) {
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
 	const [completed, setCompleted] = useState(false);
+
+	const [modalOpen, setModalOpen] = useState(false);
+	const { id } = useParams();
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		setModalOpen(true);
+	}, []);
 
 	function handleVerifyList(id) {
 		const getList = [...list];
@@ -29,46 +38,22 @@ function TaskEdit({ updateIsOpen, updateIsClose, list, listItem, isUpdate }) {
 	}
 
 	function handleUpdateList() {
-		const getList = [...list];
-		let item = getList.find((e) => e.id == listItem());
-		if (completed !== item.completed) {
-			const addNewList = [...list];
-			const index = addNewList.findIndex((i) => i.id == listItem());
-			addNewList[index] = {
-				id: listItem(),
-				title: item.title,
-				description: item.description,
-				completed: completed,
-			};
-			isUpdate(addNewList);
-			setTitle("");
-			setDescription("");
-			setCompleted(false);
-		} else {
-			if (title !== "" || description !== "") {
-				const addNewList = [...list];
-				const index = addNewList.findIndex((i) => i.id == listItem());
-				addNewList[index] = {
-					id: listItem(),
-					title: title,
-					description: description,
-					completed: completed,
-				};
-				isUpdate(addNewList);
-				setTitle("");
-				setDescription("");
-				setCompleted(false);
-			} else {
-				alert("Os campos são obrigatórios para a alteração");
-				setTitle("");
-				setDescription("");
-				setCompleted(false);
-				updateIsClose;
-			}
-		}
+		const addNewList = [...list];
+		const index = addNewList.findIndex((item) => item.id == id);
+		addNewList[index] = {
+			id: id,
+			title: title,
+			description: description,
+			completed: completed,
+		};
+		reloadList(addNewList);
+		setTitle("");
+		setDescription("");
+		setModalOpen(!modalOpen);
+		navigate("/");
 	}
 
-	if (updateIsOpen) {
+	if (modalOpen) {
 		return (
 			<>
 				<Modal>
@@ -84,20 +69,21 @@ function TaskEdit({ updateIsOpen, updateIsClose, list, listItem, isUpdate }) {
 											<th>Status</th>
 										</tr>
 									</thead>
-									<tbody>{handleVerifyList(listItem())}</tbody>
+									<tbody>{handleVerifyList(id)}</tbody>
 								</table>
 							</div>
 						</div>
 						<div className="taskEdit__form">
 							<div>
 								<h4>Digite os novos valores: </h4>
-								<form>
+								<form onSubmit={handleUpdateList}>
 									<div>
 										<input
 											type="text"
 											id="title"
 											placeholder="Título"
 											value={title}
+											required
 											onChange={(e) => setTitle(e.target.value)}
 										/>
 										<input
@@ -105,6 +91,7 @@ function TaskEdit({ updateIsOpen, updateIsClose, list, listItem, isUpdate }) {
 											id="description"
 											placeholder="Descrição"
 											value={description}
+											required
 											onChange={(e) => setDescription(e.target.value)}
 										/>
 									</div>
@@ -117,22 +104,22 @@ function TaskEdit({ updateIsOpen, updateIsClose, list, listItem, isUpdate }) {
 											onChange={(e) => setCompleted(e.target.checked)}
 										/>
 									</span>
+									<div className="taskEdit__actions">
+										<Button
+											text={"Sair"}
+											className={"buttonA"}
+											click={() => {
+												setModalOpen(!modalOpen);
+												navigate("/");
+											}}
+										/>
+										<Button
+											text={"Salvar"}
+											className={"buttonB"}
+											type={"submit"}
+										/>
+									</div>
 								</form>
-							</div>
-							<div className="taskEdit__actions">
-								<Button
-									text={"Sair"}
-									className={"buttonA"}
-									onClick={updateIsClose}
-								/>
-								<Button
-									text={"Salvar"}
-									className={"buttonB"}
-									onClick={() => {
-										handleUpdateList();
-										updateIsClose();
-									}}
-								/>
 							</div>
 						</div>
 					</div>

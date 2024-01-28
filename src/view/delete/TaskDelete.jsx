@@ -3,13 +3,23 @@ import Button from "../../components/Button/button";
 import iconCompleted from "../../assets/completed.svg";
 import iconNoCompleted from "../../assets/no_completed_black.svg";
 import "./TaskDelete.scss";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-function TaskDelete({ DeleteIsOpen, DeleteIsClose, list, listItem, isDelete }) {
+function TaskDelete({ list, reloadList }) {
+	const { id } = useParams();
+	const navigate = useNavigate();
+	const [modalOpen, setModalOpen] = useState(false);
+
+	useEffect(() => {
+		setModalOpen(true);
+	}, []);
+
 	function handleDeleteList(id) {
 		const itemList = list.findIndex((item) => item.id == id);
 		const AddNewList = [...list];
 		AddNewList.splice(itemList, 1);
-		isDelete(AddNewList);
+		reloadList(AddNewList);
 	}
 
 	function handleVerifyList(id) {
@@ -30,7 +40,7 @@ function TaskDelete({ DeleteIsOpen, DeleteIsClose, list, listItem, isDelete }) {
 		);
 	}
 
-	if (DeleteIsOpen) {
+	if (modalOpen) {
 		return (
 			<Modal>
 				<div className="taskDelete">
@@ -45,7 +55,7 @@ function TaskDelete({ DeleteIsOpen, DeleteIsClose, list, listItem, isDelete }) {
 										<th>Status</th>
 									</tr>
 								</thead>
-								<tbody>{handleVerifyList(listItem())}</tbody>
+								<tbody>{handleVerifyList(id)}</tbody>
 							</table>
 						</div>
 					</div>
@@ -53,14 +63,18 @@ function TaskDelete({ DeleteIsOpen, DeleteIsClose, list, listItem, isDelete }) {
 						<Button
 							text={"Não"}
 							className={"buttonA"}
-							onClick={DeleteIsClose}
+							click={() => {
+								setModalOpen(!modalOpen);
+								navigate("/");
+							}}
 						/>
 						<Button
 							text={"Sim"}
 							className={"buttonB"}
-							onClick={() => {
-								handleDeleteList(listItem());
-								DeleteIsClose();
+							click={() => {
+								handleDeleteList(id);
+								setModalOpen(!modalOpen);
+								navigate("/");
 							}}
 						/>
 					</div>
