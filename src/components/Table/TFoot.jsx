@@ -1,8 +1,11 @@
 import React from "react";
 
 import iconMore from "../../assets/more.svg";
+import { useNavigate } from "react-router-dom";
 
 function TFoot() {
+	const navigate = useNavigate();
+
 	return (
 		<tfoot>
 			<tr>

@@ -12,7 +12,7 @@
 
 	&__table {
 		margin: 0px auto 30px auto;
-		padding: 20px;
+		padding: 20px 30px;
 		background-color: rgb(238, 238, 238);
 		border-radius: 10px;
 	}
@@ -26,11 +26,11 @@
 		thead {
 			text-align: left;
 			font-weight: 600;
-			font-size: 16px;
+			font-size: 14px;
 		}
 
 		thead tr th {
-			padding-bottom: 20px;
+			padding-bottom: 10px;
 			border-bottom: 2px solid black;
 		}
 
@@ -46,7 +46,7 @@
 		thead::after {
 			content: "-";
 			display: block;
-			line-height: 10px;
+			line-height: 8px;
 			visibility: hidden;
 		}
 
@@ -55,9 +55,9 @@
 		// BODY STYLE TABLE
 
 		tbody tr {
-			padding-top: 13px;
+			padding-top: 7px;
 			font-weight: 400;
-			font-size: 18px;
+			font-size: 16px;
 		}
 
 		tbody tr td:first-child {
@@ -72,56 +72,5 @@
 			padding-left: 30px;
 			text-align: center;
 		}
-	}
-
-	& form {
-		display: flex;
-		flex-direction: column;
-		align-items: left;
-		justify-content: start;
-		row-gap: 15px;
-
-		& div {
-			display: flex;
-			gap: 20px;
-		}
-
-		input[type="text"] {
-			width: 300px;
-			height: 40px;
-			margin-top: 10px;
-			border-radius: 7px;
-			padding-left: 10px;
-			border: none;
-			background-color: rgb(238, 238, 238);
-			font-weight: 400;
-			font-size: 16px;
-			outline: none;
-		}
-
-		input[type="text"]:focus {
-			outline: 1px solid rgb(129, 129, 129);
-		}
-
-		& span {
-			font-size: 18px;
-			font-weight: 500;
-			padding-left: 2px;
-			margin-bottom: 20px;
-		}
-
-		& span input[type="checkbox"] {
-			margin-left: 10px;
-			position: absolute;
-			height: 20px;
-			width: 20px;
-			cursor: pointer;
-		}
-	}
-
-	&__actions {
-		display: flex;
-		justify-content: center;
-		gap: 20px;
 	}
 }
