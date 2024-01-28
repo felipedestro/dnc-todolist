@@ -1,15 +1,18 @@
 import Modal from "../../components/Modal/modal";
 import Button from "../../components/Button/button";
-import iconCompleted from "../../assets/completed.svg";
-import iconNoCompleted from "../../assets/no_completed_black.svg";
-import "./TaskDelete.scss";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import THead from "../../components/Table/THead";
+import TBody from "../../components/Table/TBody";
+import "./TaskDelete.scss";
 
 function TaskDelete({ list, reloadList }) {
 	const { id } = useParams();
 	const navigate = useNavigate();
 	const [modalOpen, setModalOpen] = useState(false);
+
+	const getList = [...list];
+	const item = getList.find((element) => element.id == id);
 
 	useEffect(() => {
 		setModalOpen(true);
@@ -22,24 +25,6 @@ function TaskDelete({ list, reloadList }) {
 		reloadList(AddNewList);
 	}
 
-	function handleVerifyList(id) {
-		const getList = [...list];
-		let item = getList.find((e) => e.id == id);
-		return (
-			<tr>
-				<td>{item.title}</td>
-				<td>{item.description}</td>
-				<td>
-					{item.completed == true ? (
-						<img src={iconCompleted} alt="icon completed" />
-					) : (
-						<img src={iconNoCompleted} alt="icon completed" />
-					)}
-				</td>
-			</tr>
-		);
-	}
-
 	if (modalOpen) {
 		return (
 			<Modal>
@@ -48,14 +33,8 @@ function TaskDelete({ list, reloadList }) {
 						<h1>Deseja relamente deletar esse item?</h1>
 						<div className="taskDelete__table">
 							<table>
-								<thead>
-									<tr>
-										<th>Título</th>
-										<th>Descrição</th>
-										<th>Status</th>
-									</tr>
-								</thead>
-								<tbody>{handleVerifyList(id)}</tbody>
+								<THead />
+								<TBody list={list} id={id} />
 							</table>
 						</div>
 					</div>

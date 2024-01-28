@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Modal from "../../components/Modal/modal";
 import Button from "../../components/Button/button";
-import iconCompleted from "../../assets/completed.svg";
-import iconNoCompleted from "../../assets/no_completed_black.svg";
 import { useNavigate, useParams } from "react-router-dom";
+import THead from "../../components/Table/THead";
+import TBody from "../../components/Table/TBody";
 import "./TaskEdit.scss";
 
 function TaskEdit({ list, reloadList }) {
@@ -18,24 +18,6 @@ function TaskEdit({ list, reloadList }) {
 	useEffect(() => {
 		setModalOpen(true);
 	}, []);
-
-	function handleVerifyList(id) {
-		const getList = [...list];
-		let item = getList.find((e) => e.id == id);
-		return (
-			<tr>
-				<td>{item.title}</td>
-				<td>{item.description}</td>
-				<td>
-					{item.completed == true ? (
-						<img src={iconCompleted} alt="icon completed" />
-					) : (
-						<img src={iconNoCompleted} alt="icon completed" />
-					)}
-				</td>
-			</tr>
-		);
-	}
 
 	function handleUpdateList() {
 		const addNewList = [...list];
@@ -62,14 +44,8 @@ function TaskEdit({ list, reloadList }) {
 							<div className="taskEdit__table">
 								<h1>Item selecionado para alteração: </h1>
 								<table>
-									<thead>
-										<tr>
-											<th>Título</th>
-											<th>Descrição</th>
-											<th>Status</th>
-										</tr>
-									</thead>
-									<tbody>{handleVerifyList(id)}</tbody>
+									<THead />
+									<TBody list={list} id={id} />
 								</table>
 							</div>
 						</div>
