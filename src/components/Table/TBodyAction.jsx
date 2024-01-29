@@ -5,8 +5,20 @@ import iconCompleted from "../../assets/completed.svg";
 import iconNoCompleted from "../../assets/no_completed.svg";
 import { useNavigate } from "react-router-dom";
 
-function TBodyAction({ list, inTable }) {
+function TBodyAction({ list, inTable, reloadList }) {
 	const navigate = useNavigate();
+
+	function handleUpdateList(data) {
+		const addNewList = [...list];
+		const index = addNewList.findIndex((item) => item.id == data.id);
+		addNewList[index] = {
+			id: data.id,
+			title: data.title,
+			description: data.description,
+			completed: !data.completed,
+		};
+		reloadList(addNewList);
+	}
 
 	return (
 		<tbody>
@@ -15,11 +27,16 @@ function TBodyAction({ list, inTable }) {
 					<td>{item.title}</td>
 					<td>{item.description}</td>
 					<td>
-						{item.completed == true ? (
-							<img src={iconCompleted} alt="icon completed" />
-						) : (
-							<img src={iconNoCompleted} alt="icon no completed" />
-						)}
+						<button
+							onClick={() => {
+								handleUpdateList(item);
+							}}>
+							{item.completed == true ? (
+								<img src={iconCompleted} alt="icon completed" />
+							) : (
+								<img src={iconNoCompleted} alt="icon no completed" />
+							)}
+						</button>
 					</td>
 					{inTable == true && (
 						<td>

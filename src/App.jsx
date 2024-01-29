@@ -16,7 +16,9 @@ function App() {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path="/" element={<Home list={list} />}>
+				<Route
+					path="/"
+					element={<Home list={list} reloadList={handleReoladList} />}>
 					<Route
 						path="add"
 						element={<TaskAdd list={list} reloadList={handleReoladList} />}
