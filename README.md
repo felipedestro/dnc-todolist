@@ -1,14 +1,15 @@
 <h1 align="center"> TODO LIST </h1>
 
 <p align="center">
-O projeto todolist tem base descorrer funcionalidades de React + Vite para resposta ao desafio 03 do curso de FullStack Developer da escola DNC. <br/>
+Projeto todo list tem como objetivo facilitar a listagem de tarefas de uma forma intuitiva e fácil, organizando seus afazeres do dia! <br/>
 </p>
 
 <p align="center">
   <a href="#funcionalidades">Funcionalidades</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#demonstração">Demonstração</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#rodando-localmente">Rodando Localmente</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#tecnologias">Tecnologias</a>
+  <a href="#tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+   <a href="#estrutura-do-projeto">Estrutura do Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#rodando-localmente">Rodando Localmente</a>
+  
 </p>
 
 <p align="center">
@@ -16,15 +17,27 @@ O projeto todolist tem base descorrer funcionalidades de React + Vite para respo
 </p>
 
 <p align="center">
-  <img alt="projeto e-commerce" src=".github/mobile.png" width="100%">
+  <img alt="projeto e-commerce" src=".github/todolist.png" width="100%">
 </p>
 
-#### Funcionalidades
+## Funcionalidades
 
-- Modal Dinâmico
-- Adicionar no item a lista
-- Alterar informação do item selecionado
-- Remover item da lista
+#### Modal Dinâmico
+
+- Para toda tomada de decisão é feita a chamada de um modal dinâmico, seja para adicionar, alterar ou excluir uma tarefa.
+<p align="center">
+  <img alt="add modal" src=".github/add.png" width="32%">
+  <img alt="add modal" src=".github/edit.png" width="32%">
+  <img alt="add modal" src=".github/delete.png" width="32%">
+</p>
+
+#### Apenas um clique
+
+- Alterar de tarefa a fazer para concluída com um clique, ou vice e versa.
+
+ <p align="center">
+  <img alt="add modal" src=".github/onclick.gif" width="50%">
+</p>
 
 ## Tecnologias
 
@@ -37,31 +50,55 @@ O projeto todolist tem base descorrer funcionalidades de React + Vite para respo
   <img src='https://pt.vitejs.dev/logo.svg' width="42px"/>
 </p>
 
+## Estrutura do projeto
+
+- `./src/components` - São todos os pedaços essenciais para execução das interfaces
+
+- `./src/view` - Páginas que serão executadas e mostradas ao usuário final.
+
+- `./src/App.jsx` - Contém as rotas do projeto.
+
+  - A rotas traz a execução do modal de forma dinâmica, trazendo um código mais limpo e de melhor perfomance:
+
+  ```jsx
+  <Route path="/" element={<Home list={list} reloadList={handleReoladList} />}>
+  	<Route
+  		path="add"
+  		element={<TaskAdd list={list} reloadList={handleReoladList} />}
+  	/>
+  	<Route
+  		path="edit/:id"
+  		element={<TaskEdit list={list} reloadList={handleReoladList} />}
+  	/>
+  	<Route
+  		path="delete/:id"
+  		element={<TaskDelete list={list} reloadList={handleReoladList} />}
+  	/>
+  </Route>
+  ```
+
 ## Rodando localmente
 
-Clone o projeto
+Certifique-se de quem todos requisitos necessários para execução do projeto de forma local.
 
-```bash
-  git clone https://github.com/felipedestro/dnc-todolist.git
-```
+#### setup ambiente
 
-Entre no diretório do projeto
+- [Node LTS](https://nodejs.org/en)
+  - `node -v` - Verifique se tem instalado na máqui
 
-```bash
-  cd dnc-todolist
-```
+#### Siga os passos abaixo:
+
+Clone o projeto:
+`git clone https://github.com/felipedestro/dnc-todolist.git`
+
+Acesse o diretorio
+`cd dnc-todolist`
 
 Instale as dependências
-
-```bash
-  npm install
-```
+`npm install`
 
 Inicie o servidor
-
-```bash
-  npm run dev
-```
+`npm run dev`
 
 ---
 

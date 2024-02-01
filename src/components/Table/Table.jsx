@@ -1,5 +1,4 @@
 import "./Table.scss";
-import { useNavigate } from "react-router-dom";
 import THead from "./THead";
 import TBodyAction from "./TBodyAction";
 import TFoot from "./TFoot";
